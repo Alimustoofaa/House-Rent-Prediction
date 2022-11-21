@@ -1,5 +1,7 @@
 
 
+
+
 # Proyek Pertama House Rent Prediction
 
 #### Disusun oleh : Ali Mustofa
@@ -117,14 +119,14 @@ Berikut adalah fitur dengan sample yang tidak merata :
   
 + state
   <div><img src="https://user-images.githubusercontent.com/56061857/202909272-6b398793-6542-4af8-a1b6-1c3d483d82fa.png" width="250"/></div><br />
-  Column state memiliki banyak sekali nilai unique. Untuk menghindari high dimensional data, maka column ini akan dihapus.
-
+  Column state ada 2 kategori ok memiliki sample 49 dan or memiliki sample 44, untuk menghindari high dimensional data, maka sample ini akan dihapus
+  
 #### Analisis sebaran pada setiap fitur numerik
 <div><img src="https://user-images.githubusercontent.com/56061857/202910078-50a5fe0b-7c69-4262-82ee-6161337f394f.png" width="600"/></div><br />
 Berikut analisis dari grafik di atas :
 
-+ Rentang harga sewa cukup tinggi, yaitu dari 825.000000 hingga 256832.000000. Namun, rata-rata harga rumah hanya 12641.323768. Distribusi harga yang kurang bagus seperti ini dapat berimplikasi pada model.
-+ Sebagian besar rumah/apartement memiliki luas di bawah 2000 sqft.
++ Rentang harga sewa cukup tinggi, yaitu dari 825.000000 hingga 2768307249.000000. Namun, rata-rata harga rumah hanya 12656.828313. Distribusi harga yang kurang bagus seperti ini dapat berimplikasi pada model.
++ Rata-rata rumah/apartement memiliki luas di bawah 1111 sqft
 + Sebagian besar rumah/apartement memiliki 1 sampai 8 beds dan 1 sampai 9 kamar mandi.
 + Sebagian besar rumah/apartement memiliki fasilitas memelihara kucing dan anjing.
 + Sebagian besar rumah/apartement memperbolehkan merokok.
@@ -139,15 +141,10 @@ Multivariate Analysis menunjukkan hubungan antara dua atau lebih fitur dalam dat
 #### Analisis fitur numerik
 
 + Column beds and baths
-	Kedua column ini dianalisis karena tidak memungkinkan 1 rumah memiliki 1100 kamar tidur dan 75 kamar mandri. Data tersebut diatas maksimal akan dihapus. Hal ini menyebabkan jumlah sampe berkurangnya jumlah sample sebesar 3. Dan dianalisa terdapat data dibawah minimal yaitu 0, maka sample data kamar tidur dan kamar mandi akan dihapus. Hal ini menyebabkan berkurangnya jumlah sample sebesar 9564
-+ Fitur Size dan Rent (Menghapus Price per sqft Outlier)
-  Untuk memudahkan dalam mendeteksi outlier, maka dibuat fitur baru 'Price_per_sqft' dari kedua fitur tersebut untuk menganalisis harga sewa per luas sqft.
-  <div><img src="https://user-images.githubusercontent.com/107544829/188323140-6174b592-4c7b-4671-9acb-b49a621d2aba.png" width="220"/></div>
-  Dari sini dapat terlihat bahwa harga 571 per sqft sangat rendah dan harga 1400000 per sqft sangat tinggi. Untuk itu penghapusan outlier price per sqft outlier dengan mean dan one standard deviation yang telah dikelompokkan berdasarkan kota. Hal ini menyebabkan berkurangnya jumlah sample sebesar 497.
+	Kedua column ini dianalisis karena tidak memungkinkan 1 rumah memiliki 1100 kamar tidur dan 75 kamar mandri. Data tersebut diatas maksimal akan dihapus. Hal ini menyebabkan jumlah sampe berkurangnya jumlah sample sebesar 3. Dan dianalisa terdapat data dibawah minimal yaitu 0, maka sample data kamar tidur dan kamar mandi akan dihapus. Hal ini menyebabkan berkurangnya jumlah sample sebesar 9573
++ Fitur sqfeet dan price (Menghapus price per sqfeet Outlier)
+Untuk itu penghapusan outlier price outlier dengan mean dan one standard deviation yang telah dikelompokkan berdasarkan type. Hal ini menyebabkan berkurangnya jumlah sample sebesar 960. begitu jga degan sqfeet yang menyebabkan jumlahnya sample berkurang 631.
 
-+ Fitur Bathroom dan BHK (Menghapus Bathroom Outlier)
-  Kedua fitur ini dianalisis karena tidak biasa untuk rumah dengan 2 BHK memiliki 4 kamar mandi. Untuk itu ditentukan batas bahwa jumlah kamar mandi tidak boleh melebihi jumlah BHK + 2. Hal ini menyebabkan berkurangnya sample sebesar 3.
-  
 + Melihat kolerasi antara semua fitur numerik
   <div><img src="https://user-images.githubusercontent.com/56061857/202914854-fc2b207e-c320-4309-a072-e7e02e019949.png" width="650"/></div>
   Columnt sqfeet, beds, baths ,cats_allowed, dogs_allowedberkorelasi tidak signifikan dengan fitur target (price). Hal ini mungkin   disebabkan oleh kurangnya data dalam penelitian ini. Column beds, baths berkolerasi signifikan dengan fitur sqfeet. Hal ini sudah sesuai harapan dari penghapusan outlier yang sudah dilakukan sebelumnya.
@@ -177,7 +174,7 @@ Analisis ini dilakukan untuk melihat kolerasi antara fitur kategorik dengan fitu
   
 + Train Test Split
 
-  Train test split aja proses membagi data menjadi data latih dan data uji. Data latih akan digunakan untuk membangun model, sedangkan data uji akan digunakan untuk menguji performa model. Pada proyek ini dataset sebesar 191169 dibagi menjadi 181610 untuk data latih dan 9559 untuk data uji.
+  Train test split aja proses membagi data menjadi data latih dan data uji. Data latih akan digunakan untuk membangun model, sedangkan data uji akan digunakan untuk menguji performa model. Pada proyek ini dataset sebesar 253979 dibagi menjadi 241280 untuk data latih dan 12699 untuk data uji.
   
 + Normalization
 
@@ -203,29 +200,29 @@ Analisis ini dilakukan untuk melihat kolerasi antara fitur kategorik dengan fitu
     + `learning_rate` = Learning rate memperkuat kontribusi setiap regressor.
     + `random_state` = Mengontrol seed acak yang diberikan pada setiap base_estimator pada setiap iterasi boosting.
 
-+ Hyperparameter Tuning (Grid Search)
-  Hyperparameter tuning adalah cara untuk mendapatkan parameter terbaik dari algoritma dalam membangun model. Salah satu teknik dalam hyperparameter tuning yang digunakan dalam proyek ini adalah grid search. Berikut adalah hasil dari Grid Search pada proyek ini :
-  | model    | best_params                                                     |
-  |----------|-----------------------------------------------------------------|
-  | knn      | {'n_neighbors': 7}                                              |
-  | boosting | {'learning_rate': 0.1, 'n_estimators': 100, 'random_state': 11} |
-  | rf       | {'max_depth': 8, 'n_estimators': 25, 'random_stste': 11}        |
-
 ## Evaluation
 
-Metrik evaluasi yang digunakan pada proyek ini adalah akurasi dan mean squared error (MSE). Akurasi menentukan tingkat kemiripan antara hasil prediksi dengan nilai yang sebenarnya (y_test). Mean squared error (MSE) mengukur error dalam model statistik dengan cara menghitung rata-rata error dari kuadrat hasil aktual dikurang hasil prediksi. Berikut formulan MSE :
-<div><img src="https://user-images.githubusercontent.com/107544829/188412654-f5dc0ae1-901b-470e-aae5-1f6b5fb68b4d.png" width="300"/></div>
+Pada Proyek ini menggunakan model machine learning bertipe regresi yang berarti Jika prediksi mendekati nilai sebenarnya, performanya baik. Sedangkan jika tidak, performanya buruk. Secara teknis, selisih antara nilai sebenarnya dan nilai prediksi disebut eror. Maka, semua metrik mengukur seberapa kecil nilai error tersebut.
 
-Berikut hasil evaluasi pada proyek ini :
+Metrik yang akan kita gunakan pada prediksi ini adalah MSE atau Mean Squared Error yang menghitung jumlah selisih kuadrat rata-rata nilai sebenarnya dengan nilai prediksi. MSE didefinisikan dalam persamaan berikut.
+<div><img src="https://user-images.githubusercontent.com/56061857/203086179-7189dfbf-bd13-493f-a517-6be0915cb4dc.png" width="450"/></div>
+Keterangan:
 
-+ Akurasi
-  | model    | accuracy |
-  |----------|----------|
-  | knn      | 0.726775 |
-  | boosting | 0.898556 |
-  | rf       | 0.932057 |
+N = jumlah dataset
 
-+ Mean Squared Error (MSE)
-  <div><img src="https://user-images.githubusercontent.com/107544829/188413846-7d5454b5-7f83-488e-836f-4f3593eb3d5d.png" width="300"/></div>
+yi = nilai sebenarnya
+
+y_pred = nilai prediksi
+
+Berikut Hasil perhitungan MSE
+
+|			| train           | test             |
+|----------|------------------|------------------|
+| KNN  	| 30046.629366  | 134069.662903  |
+| RF   | 18464.87181  | 135898.532381   |
+| Boosting | 91101.065848  | 134836.83253 |
+
+Untuk memudahkan, mari kita plot matrik tersebut dengan bar chart
+<div><img src="https://user-images.githubusercontent.com/56061857/203088136-45f20cef-174e-460c-beba-213755fcd766.png" width="400"/></div>
 
 Dari hasil evaluasi dapat dilihat bahwa model dengan algoritma Random Forest memiliki akurasi lebih tinggi tinggi dan tingkat error lebih kecil dibandingkan algoritma lainnya dalam proyek ini.
