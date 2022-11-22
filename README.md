@@ -18,16 +18,11 @@ Tempat tinggal adalah kebutuhan primer bagi manusia untuk berlindung dan hidup m
 <br>
 
 <div><img src="https://www.pinhome.id/blog/wp-content/uploads/2021/01/25321-rumah-idaman-1.jpg" width="1000"/></div>
-
-[Referensi gambar](https://www.pinhome.id/)
-
 <br>
 
 Harga dari setiap rumah diukur dari nilai yang dimiliki oleh rumah tersebut. Namun, harga ini tidak selalu pasti dan sulit untuk melakukan prediksi akurat secara manual. Faktor ketidakpastian perlu dikurangi oleh perusahaan sewa dengan membangun sistem prediksi yang dapat menentukan berapa harga sewa yang pantas untuk karakteristik rumah tertentu.
 
 Dalam mencapai hal tersebut, maka dilakukan penelitian untuk memprediksi harga sewa rumah menggunakan model machine learning. Diharapkan model ini mampu memprediksi harga sewa yang sesuai dengan harga pasar. Prediksi ini nantinya dijadikan acuan bagi perusahaan dalam menyewa rumah dengan harga yang dapat mendatangkan profit bagi perusahaan.
-
-Referensi : [Analisis Prediksi Harga Rumah Sesuai Spesifikasi Menggunakan Multiple Linear Regression](https://ejournal.upnvj.ac.id/index.php/informatik/article/download/3635/1498)
 
 ## Business Understanding
 
@@ -50,7 +45,7 @@ Proyek ini dibangun untuk perusahaan dengan karakteristik bisnis sebagai berikut
 
 ### Solution Statement
 
-1. Menganalisis data dengan melakukan univariate analysis dan multivariate analysis. Memahami data juga dapat dilakukan dengan visualisasi. Memahami data dapat membantu untuk mengetahui kolerasi antar fitur dan mendeteksi outlier.
+1. Menganalisis data dengan melakukan univariate analysis dan multivariate analysis. Memahami data juga dapat dilakukan dengan visualisasi. Memahami data dapat membantu untuk mengetahui kolerasi antar fitur dan mendeteksi *outlier*.
 2. Menyiapkan data agar bisa digunakan dalam membangun model.
 3. Melakukan hyperparameter tuning menggunakan grid search dan membangun model regresi yang dapat memprediksi bilangan kontinu. ALgoritma yang dipakai dalam proyek ini adalah K-Nearest Neighbour, Random Forest, dan AdaBoost.
 
@@ -105,25 +100,115 @@ Univariate Analysis adalah menganalisis setiap fitur secara terpisah.
 #### Analisis jumlah nilai unique pada setiap fitur category
 
 Column kategoti laundry_options, parking_options memiliki sebaran sample yang cukup merata.
-<div><img src="https://user-images.githubusercontent.com/56061857/202908616-4405a0f7-41b6-488f-a6e5-e77ecd3d9304.png" width="250"/></div><br />
-<div><img src="https://user-images.githubusercontent.com/56061857/202908631-65a290ef-35b1-4bf6-99e1-39b7de5efbc6.png" width="250"/></div><br />
+
+| laundry_options    |       |
+|--------------------|-------|
+| laundry in bldg    | 27816 |
+| laundry on site    | 39183 |
+| no laundry on site | 2551  |
+| w/d hookups        | 50251 |
+| w/d in unit        | 91073 |
+
+| parking_options    |       |
+|--------------------|-------|
+| attached garage    | 27591 |
+| carport            | 28685 |
+| detached garage    | 12798 |
+| no parking         | 1973  |
+| off-street parking | 88311 |
+| street parking     | 10570 |
+| valet parking      | 122   |
+
+
 
 Berikut adalah fitur dengan sample yang tidak merata :
 
 + type
-  <div><img src="https://user-images.githubusercontent.com/56061857/202908717-abc93755-d962-4205-a4fc-bdb2822a19a9.png" width="250"/></div><br />
+
+| type            |        |
+|-----------------|--------|
+| apartment       | 218032 |
+| assisted living | 1      |
+| condo           | 4864   |
+| cottage/cabin   | 702    |
+| duplex          | 3452   |
+| flat            | 349    |
+| house           | 23741  |
+| in-law          | 145    |
+| land            | 4      |
+| loft            | 511    |
+| manufactured    | 3008   |
+| townhouse       | 10381  |
+
   Hanya terdapat 1 sampke assisted living dan 4 sample land. Untuk menghindari high dimensional data, maka kedua sample ini akan dihapus.
 
 + region
-  <div><img src="https://user-images.githubusercontent.com/56061857/202909123-75c85f84-7d46-4335-81b5-430ff1dcce9c.png" width="250"/></div><br />
+
+| region                 | 10381 |
+|------------------------|-------|
+| SF bay area            | 2327  |
+| akron / canton         | 1532  |
+| albany                 | 2090  |
+| albuquerque            | 2144  |
+| ames                   | 360   |
+| ...                    |       |
+| winston-salem          | 2123  |
+| worcester / central MA | 1452  |
+| yuba-sutter            | 152   |
+| yuma                   | 215   |
+| zanesville / cambridge | 3     |
+
   Hanya terdapat 1 sample zanesville / cambridge sample tersebut akan dihapus. Untuk menghindari high dimensional data, maka sample ini akan dihapus.
   
 + state
-  <div><img src="https://user-images.githubusercontent.com/56061857/202909272-6b398793-6542-4af8-a1b6-1c3d483d82fa.png" width="250"/></div><br />
+
+| state |       |
+|-------|-------|
+| ak    | 2169  |
+| al    | 6198  |
+| ar    | 3148  |
+| az    | 6752  |
+| ca    | 33085 |
+| co    | 11308 |
+| ct    | 3765  |
+| dc    | 2502  |
+| de    | 2048  |
+| fl    | 31926 |
+| ga    | 13841 |
+| hi    | 1840  |
+| ia    | 7488  |
+| id    | 4466  |
+| il    | 9706  |
+| in    | 6416  |
+| ks    | 7910  |
+| ky    | 5419  |
+| la    | 7304  |
+| ma    | 4926  |
+| md    | 7451  |
+| me    | 420   |
+| mi    | 14529 |
+| mn    | 7468  |
+| mo    | 2158  |
+| ms    | 4973  |
+| mt    | 1339  |
+| nc    | 18628 |
+| nd    | 3428  |
+| ne    | 2697  |
+| nh    | 1761  |
+| nj    | 5711  |
+| nm    | 2916  |
+| nv    | 2846  |
+| ny    | 9991  |
+| oh    | 6558  |
+| ok    | 49    |
+| or    | 44    |
+
   Column state ada 2 kategori ok memiliki sample 49 dan or memiliki sample 44, untuk menghindari high dimensional data, maka sample ini akan dihapus
   
 #### Analisis sebaran pada setiap fitur numerik
 <div><img src="https://user-images.githubusercontent.com/56061857/203339971-c75792ac-75f8-4d42-85d8-15145ddc6ae0.png" width="600"/></div><br />
+
+
 Berikut analisis dari grafik di atas :
 
 + Rentang harga sewa cukup tinggi, yaitu dari 825.000000 hingga 2768307249.000000. Namun, rata-rata harga rumah hanya 12656.828313. Distribusi harga yang kurang bagus seperti ini dapat berimplikasi pada model.
@@ -175,7 +260,7 @@ Analisis ini dilakukan untuk melihat kolerasi antara fitur kategorik dengan fitu
   
 + Train Test Split
 
-  Train test split aja proses membagi data menjadi data latih dan data uji. Data latih akan digunakan untuk membangun model, sedangkan data uji akan digunakan untuk menguji performa model. Pada proyek ini dataset sebesar 253979 dibagi menjadi 241280 untuk data latih dan 12699 untuk data uji.
+  Train test split aja proses membagi data menjadi data latih dan data uji. Data latih akan digunakan untuk membangun model, sedangkan data uji akan digunakan untuk menguji performa model. Pada proyek ini dataset sebesar 253979,   dengan data tersebut dibagi dengan test size 0.05 mendapatkan data test sebesat 12699, dan data latih sebesar 241280.
   
 + Normalization
 
@@ -187,20 +272,19 @@ Analisis ini dilakukan untuk melihat kolerasi antara fitur kategorik dengan fitu
   Penelitian ini melakukan pemodelan dengan 3 algoritma, yaitu K-Nearest Neighbour, Random Forest, dan
   + K-Nearest Neighbour
     K-Nearest Neighbour bekerja dengan membandingkan jarak satu sampel ke sampel pelatihan lain dengan memilih sejumlah k tetangga terdekat. Proyek ini menggunakan [sklearn.neighbors.KNeighborsRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html) dengan memasukkan X_train dan y_train dalam membangun model. Parameter yang digunakan pada proyek ini adalah :
-    + `n_neighbors` = Jumlah k tetangga tedekat.
+    + `n_neighbors = 10`
 
   + Random Forest
     Algoritma random forest adalah teknik dalam machine learning dengan metode ensemble. Teknik ini beroperasi dengan membangun banyak decision tree pada waktu pelatihan. Proyek ini menggunakan [sklearn.ensemble.RandomForestRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html) dengan memasukkan X_train dan y_train dalam membangun model. Parameter yang digunakan pada proyek ini adalah :
-    + `n_estimators` = Jumlah maksimum estimator di mana boosting dihentikan.
-    + `max_depth` = Kedalaman maksimum setiap tree.
-    + `random_state` = Mengontrol seed acak yang diberikan pada setiap base_estimator pada setiap iterasi boosting.
+    + `n_estimators = 50`
+    + `max_depth = 16`
+    + `random_state = 55`
+    + `n_jobs = -1`
 
   + Adaboost
     AdaBoost juga disebut Adaptive Boosting adalah teknik dalam machine learning dengan metode ensemble.  Algoritma yang paling umum digunakan dengan AdaBoost adalah pohon keputusan (decision trees) satu tingkat yang berarti memiliki pohon Keputusan dengan hanya 1 split. Pohon-pohon ini juga disebut Decision Stumps. Algoritma ini bertujuan untuk meningkatkan performa atau akurasi prediksi dengan cara menggabungkan beberapa model sederhana dan dianggap lemah (weak learners) secara berurutan sehingga membentuk suatu model yang kuat (strong ensemble learner). Proyek ini menggunakan [sklearn.ensemble.AdaBoostRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostRegressor.html) dengan memasukkan X_train dan y_train dalam membangun model. Parameter yang digunakan pada proyek ini adalah :
-    + `n_estimators` = Jumlah maksimum estimator di mana boosting dihentikan.
-    + `learning_rate` = Learning rate memperkuat kontribusi setiap regressor.
-    + `random_state` = Mengontrol seed acak yang diberikan pada setiap base_estimator pada setiap iterasi boosting.
-
+    + `learning_rate = 0.05`
+    + `random_state = 55`
 ## Evaluation
 
 Pada Proyek ini menggunakan model machine learning bertipe regresi yang berarti Jika prediksi mendekati nilai sebenarnya, performanya baik. Sedangkan jika tidak, performanya buruk. Secara teknis, selisih antara nilai sebenarnya dan nilai prediksi disebut eror. Maka, semua metrik mengukur seberapa kecil nilai error tersebut.
@@ -225,5 +309,15 @@ Berikut Hasil perhitungan MSE
 
 Untuk memudahkan, mari kita plot matrik tersebut dengan bar chart
 <div><img src="https://user-images.githubusercontent.com/56061857/203088136-45f20cef-174e-460c-beba-213755fcd766.png" width="400"/></div>
-
 Dari hasil evaluasi dapat dilihat bahwa model dengan algoritma Random Forest memiliki akurasi train lebih tinggi tinggi dan tingkat error lebih kecil dibandingkan algoritma lainnya dalam proyek ini.
+
+Hasil prediksi
+|        | y_true | prediksi_KNN | prediksi_RF | prediksi_Boosting |
+|-------:|-------:|-------------:|------------:|-------------------|
+| 202465 |    745 |        546.5 |       615.6 |            1471.8 |
+
+Dari hasil prediksi dapat dilihat bahwa model dengan algoritma Random Forest mendekati dengan harga y_true dengan selisih 130, lebih kecil dibandingkan dengan prediksi KNN dan Boosting.
+
+### Referensi 
+
+[1] [Analisis Prediksi Harga Rumah Sesuai Spesifikasi Menggunakan Multiple Linear Regression](https://ejournal.upnvj.ac.id/index.php/informatik/article/download/3635/1498)
