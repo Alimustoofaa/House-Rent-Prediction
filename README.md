@@ -2,6 +2,7 @@
 
 
 
+
 # Proyek Pertama House Rent Prediction
 
 #### Disusun oleh : Ali Mustofa
@@ -122,7 +123,7 @@ Berikut adalah fitur dengan sample yang tidak merata :
   Column state ada 2 kategori ok memiliki sample 49 dan or memiliki sample 44, untuk menghindari high dimensional data, maka sample ini akan dihapus
   
 #### Analisis sebaran pada setiap fitur numerik
-<div><img src="https://user-images.githubusercontent.com/56061857/202910078-50a5fe0b-7c69-4262-82ee-6161337f394f.png" width="600"/></div><br />
+<div><img src="https://user-images.githubusercontent.com/56061857/203339971-c75792ac-75f8-4d42-85d8-15145ddc6ae0.png" width="600"/></div><br />
 Berikut analisis dari grafik di atas :
 
 + Rentang harga sewa cukup tinggi, yaitu dari 825.000000 hingga 2768307249.000000. Namun, rata-rata harga rumah hanya 12656.828313. Distribusi harga yang kurang bagus seperti ini dapat berimplikasi pada model.
@@ -156,12 +157,12 @@ Analisis ini dilakukan untuk melihat kolerasi antara fitur kategorik dengan fitu
 + Column type
   <div><img src="https://user-images.githubusercontent.com/56061857/202915653-03ee9ec8-eb8e-4b54-95a4-50390da07294.png" width="500"/></div>
   Column type cukup memiliki pengaruh terhadap rata-rata harga sewa, terutama jika type nya flat, in-law dan apartement
-+ Cloumn laundry_option
-   <div><img src="https://user-images.githubusercontent.com/56061857/202915906-9d07367c-2715-458e-9e73-a644b56f202d.png" width="500"/></div>
++ Cloumn laundry_option dan no laundry on site
+   <div><img src="https://user-images.githubusercontent.com/56061857/203359445-1dd3caa7-de88-4c0c-8a32-420f46804f7a.png" width="500"/></div>
    Column laundry_option cukup memiliki pengaruh terhadap rata-rata harga sewa, terutama jika laundry_option nya hookups
 + Column parking_options
-   <div><img src="https://user-images.githubusercontent.com/56061857/202916317-515a3fab-41c5-49bc-90d2-19000e4213fd.png" width="500"/></div>
-   Column parking_options cukup memiliki pengaruh terhadap rata-rata harga sewa, terutama jika parking_options nya valet parking, carport, street parkingm dan off street parking
+   <div><img src="https://user-images.githubusercontent.com/56061857/203359838-07456f50-b6ea-4f82-85d4-cc9b94b56230.png" width="500"/></div>
+   Column parking_options cukup memiliki pengaruh terhadap rata-rata harga sewa, terutama jika parking_options nya valet parking, carport, street parking dan off street parking
 + Column state
   <div><img src="https://user-images.githubusercontent.com/56061857/202916431-3ae77eed-3f94-4e34-bfdb-d814cd478a2d.png" width="500"/></div>
   Fitur City memiliki pengaruh cukup besar terhadap rata-rata harga sewa, terutama jika rumah berada di state nc
@@ -225,4 +226,4 @@ Berikut Hasil perhitungan MSE
 Untuk memudahkan, mari kita plot matrik tersebut dengan bar chart
 <div><img src="https://user-images.githubusercontent.com/56061857/203088136-45f20cef-174e-460c-beba-213755fcd766.png" width="400"/></div>
 
-Dari hasil evaluasi dapat dilihat bahwa model dengan algoritma Random Forest memiliki akurasi lebih tinggi tinggi dan tingkat error lebih kecil dibandingkan algoritma lainnya dalam proyek ini.
+Dari hasil evaluasi dapat dilihat bahwa model dengan algoritma Random Forest memiliki akurasi train lebih tinggi tinggi dan tingkat error lebih kecil dibandingkan algoritma lainnya dalam proyek ini.
