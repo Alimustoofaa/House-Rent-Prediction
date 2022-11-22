@@ -1,8 +1,3 @@
-
-
-
-
-
 # Proyek Pertama House Rent Prediction
 
 #### Disusun oleh : Ali Mustofa
@@ -317,6 +312,9 @@ Hasil prediksi
 | 202465 |    745 |        546.5 |       615.6 |            1471.8 |
 
 Dari hasil prediksi dapat dilihat bahwa model dengan algoritma Random Forest mendekati dengan harga y_true dengan selisih 130, lebih kecil dibandingkan dengan prediksi KNN dan Boosting.
+
+### Kesimpulan 
+Dapat dilihat dari tiga model Algoritma yang dikembangkan, dapat disimpulkan dari hasil perbandingan serta visualisasi perbandingan prediksi 3 Algoritma yaitu KNN, Random Forest, AdaBoost . dapat disimpulkan model KNN memiliki nilai error pada data test yang paling kecil kemudian model dengan Random Forest  memiliki nilai error yang sedikit lebih banyak daripada model KNN  sedangkan model AdaBoost miliki lebih banyak nilai error dibandingkan KNN dan Random Forest .
 
 ### Referensi 
 
